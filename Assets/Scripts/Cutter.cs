@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
-using UnityEditor.Experimental.GraphView;
 
 public class Cutter : MonoBehaviour
 {
     public Material lemonMaterial;
     public Material cucumberMaterial;
     public Material tomatoMaterial;
-    public Material cheeseMaterial;
-    //public LayerMask mask;
+    public Material potatoMaterial;
+    public Material onionMaterial;
 
     private GameController controller;
+    private UIController ui;
 
     private Collider lastCollider;
 
@@ -20,6 +20,7 @@ public class Cutter : MonoBehaviour
     void Start()
     {
         controller = FindObjectOfType<GameController>();
+        ui = FindObjectOfType<UIController>();
     }
 
     // Update is called once per frame
@@ -37,20 +38,23 @@ public class Cutter : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(lastCollider != collision)
-        {
-            controller.score++;
-            lastCollider = collision;
-        }
-        else
-        {
-            lastCollider = null;
-        }
-
         if (collision.gameObject.layer == 8)
         {
+            ui.AddPointText(collision.transform.position);
+            ui.UpdateCrossPanel(1);
+
+            if (lastCollider != collision)
+            {
+                controller.score++;
+                lastCollider = collision;
+            }
+            else
+            {
+                lastCollider = null;
+            }
+
             Material material = GetMaterial(collision.gameObject);
 
             SlicedHull cuttedObject = Cut(collision.gameObject, material);
@@ -85,21 +89,13 @@ public class Cutter : MonoBehaviour
     //Add the wood object functionalities to GameObject method
     void AddComponent(GameObject obj, bool upperPiece)
     {
-        if (obj.tag == "Lemon")
-        {
-            obj.AddComponent<SphereCollider>();
-        }
-        else if (obj.tag == "Cucumber")
+        if (obj.tag == "Cucumber")
         {
             obj.AddComponent<CapsuleCollider>();
         }
-        else if (obj.tag == "Tomato")
-        {
-            obj.AddComponent<SphereCollider>();
-        }
         else
         {
-            obj.AddComponent<BoxCollider>();
+            obj.AddComponent<SphereCollider>();
         }
 
         obj.AddComponent<Rigidbody>();
@@ -133,9 +129,13 @@ public class Cutter : MonoBehaviour
         {
             return tomatoMaterial;
         }
+        else if (gameObject.tag == "Potato")
+        {
+            return potatoMaterial;
+        }
         else
         {
-            return cheeseMaterial;
+            return onionMaterial;
         }
     }
 }

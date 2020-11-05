@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour
     public GameObject lemon;
     public GameObject cucumber;
     public GameObject tomato;
-    public GameObject cheese;
+    public GameObject potato;
+    public GameObject onion;
     public Text scoreText;
 
     public int score;
@@ -28,7 +29,7 @@ public class GameController : MonoBehaviour
 
     public void GenerateNew()
     {
-        int random = Random.Range(1, 5);
+        int random = Random.Range(1, 6);
 
         if (random == 1)
             CreateRigidbody(lemon);
@@ -37,7 +38,9 @@ public class GameController : MonoBehaviour
         else if (random == 3)
             CreateRigidbody(tomato);
         else if (random == 4)
-            CreateRigidbody(cheese);
+            CreateRigidbody(potato);
+        else if (random == 5)
+            CreateRigidbody(onion);
 
         Invoke("GenerateNew", 3);
     }
