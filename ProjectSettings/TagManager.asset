@@ -9,6 +9,7 @@ TagManager:
   - Tomato
   - Potato
   - Onion
+  - Bomb
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject tomato;
     public GameObject potato;
     public GameObject onion;
+    public GameObject bomb;
+    public GameObject explosion;
     public Text scoreText;
 
     public int score;
@@ -27,9 +29,15 @@ public class GameController : MonoBehaviour
         scoreText.text = "" + score;
     }
 
+    public void BombExplosion(Vector3 position)
+    {
+        GameObject exp = Instantiate(explosion, position, Quaternion.identity);
+        Destroy(exp, 0.75f);
+    }
+
     public void GenerateNew()
     {
-        int random = Random.Range(1, 6);
+        int random = Random.Range(1, 7);
 
         if (random == 1)
             CreateRigidbody(lemon);
@@ -41,6 +49,8 @@ public class GameController : MonoBehaviour
             CreateRigidbody(potato);
         else if (random == 5)
             CreateRigidbody(onion);
+        else if (random == 6)
+            CreateRigidbody(bomb);
 
         Invoke("GenerateNew", 3);
     }

@@ -1,25 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     public Image[] crosses = new Image[3];
-    public TextMesh pointText;
+    public Text pointText;
 
-    public void UpdateCrossPanel(int length)
+    private int crossCounter = 0;
+
+    public void AddCross()
     {
-        for (int i = 0; i < length; i++)
+        if (crossCounter < 3)
         {
-            crosses[i].gameObject.SetActive(true);
+            crossCounter++;
+            for (int i = 0; i < crossCounter; i++)
+            {
+                crosses[i].gameObject.SetActive(true);
+            }
         }
     }
     
     public void AddPointText(Vector3 position)
     {
         pointText.gameObject.SetActive(true);
-        pointText.transform.position = position;
+        pointText.transform.position = Camera.main.WorldToScreenPoint(position);
         Invoke("DeletePointText", 0.5f);
     }
 

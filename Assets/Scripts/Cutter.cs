@@ -5,14 +5,9 @@ using EzySlice;
 
 public class Cutter : MonoBehaviour
 {
-    public Material lemonMaterial;
-    public Material cucumberMaterial;
-    public Material tomatoMaterial;
-    public Material potatoMaterial;
-    public Material onionMaterial;
-
     private GameController controller;
     private UIController ui;
+    private EzySliceController ezySlice;
 
     private Collider lastCollider;
 
@@ -21,6 +16,7 @@ public class Cutter : MonoBehaviour
     {
         controller = FindObjectOfType<GameController>();
         ui = FindObjectOfType<UIController>();
+        ezySlice = FindObjectOfType<EzySliceController>();
     }
 
     // Update is called once per frame
@@ -38,104 +34,35 @@ public class Cutter : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.layer == 8)
+        //Collider is cuttable
+        if (collider.gameObject.layer == 8)
         {
-            ui.AddPointText(collision.transform.position);
-            ui.UpdateCrossPanel(1);
-
-            if (lastCollider != collision)
+            //Collider is bomb
+            if (collider.tag == "Bomb")
             {
-                controller.score++;
-                lastCollider = collision;
+                ezySlice.Cut(collider.gameObject, 0.25f);
+                controller.BombExplosion(collider.transform.position);
+                ui.AddCross();
             }
+            //Collider is any cuttable object
             else
             {
-                lastCollider = null;
+                ui.AddPointText(collider.transform.position);
+                
+                if (lastCollider != collider)
+                {
+                    controller.score++;
+                    lastCollider = collider;
+                }
+                else
+                {
+                    lastCollider = null;
+                }
+
+                ezySlice.Cut(collider.gameObject, 4);
             }
-
-            Material material = GetMaterial(collision.gameObject);
-
-            SlicedHull cuttedObject = Cut(collision.gameObject, material);
-            if (cuttedObject != null)
-            {
-                GameObject upperHull = cuttedObject.CreateUpperHull(collision.gameObject, material);
-                GameObject lowerHull = cuttedObject.CreateLowerHull(collision.gameObject, material);
-
-                upperHull.tag = collision.gameObject.tag;
-                lowerHull.tag = collision.gameObject.tag;
-
-                upperHull.layer = 0;
-                lowerHull.layer = 0;
-
-                AddComponent(upperHull, true);
-                AddComponent(lowerHull, false);
-
-                Destroy(collision.gameObject);
-                Destroy(upperHull.gameObject, 4);
-                Destroy(lowerHull.gameObject, 4);
-            }
-        }
-    }
-
-    //Gameobject slice method
-    SlicedHull Cut(GameObject obj, Material material)
-    {
-        //Return slice as vertical axis
-        return obj.Slice(transform.position, transform.up, material);
-    }
-
-    //Add the wood object functionalities to GameObject method
-    void AddComponent(GameObject obj, bool upperPiece)
-    {
-        if (obj.tag == "Cucumber")
-        {
-            obj.AddComponent<CapsuleCollider>();
-        }
-        else
-        {
-            obj.AddComponent<SphereCollider>();
-        }
-
-        obj.AddComponent<Rigidbody>();
-        obj.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
-        obj.GetComponent<Rigidbody>().AddForce(transform.up * 5, ForceMode.VelocityChange);
-
-
-        if (upperPiece)
-        {
-            obj.GetComponent<Rigidbody>().AddForce(transform.right * 5, ForceMode.VelocityChange);
-            obj.transform.rotation = Quaternion.Euler(60, 45, 0);
-        }
-        else
-        {
-            obj.GetComponent<Rigidbody>().AddForce(transform.right * -5, ForceMode.VelocityChange);
-            obj.transform.rotation = Quaternion.Euler(-60, -45, 0);
-        }
-    }
-
-    Material GetMaterial(GameObject gameObject)
-    {
-        if(gameObject.tag == "Lemon")
-        {
-            return lemonMaterial;
-        }
-        else if(gameObject.tag == "Cucumber")
-        {
-            return cucumberMaterial;
-        }
-        else if (gameObject.tag == "Tomato")
-        {
-            return tomatoMaterial;
-        }
-        else if (gameObject.tag == "Potato")
-        {
-            return potatoMaterial;
-        }
-        else
-        {
-            return onionMaterial;
         }
     }
 }
