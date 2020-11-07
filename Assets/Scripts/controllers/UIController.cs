@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     public Image[] crosses = new Image[3];
     public Text pointText;
+    public Text scoreText;
+    public GameObject gameOverPanel;
 
     private int crossCounter = 0;
 
@@ -23,6 +26,11 @@ public class UIController : MonoBehaviour
         }
     }
     
+    public void UpdateScore(int score)
+    {
+        scoreText.text = "" + score;
+    }
+
     public void AddPointText(Vector3 position)
     {
         pointText.gameObject.SetActive(true);
@@ -33,5 +41,27 @@ public class UIController : MonoBehaviour
     private void DeletePointText()
     {
         pointText.gameObject.SetActive(false);
+    }
+
+    public void GameOver(int score)
+    {
+        gameOverPanel.SetActive(true);
+        foreach(Text txt in FindObjectsOfType<Text>())
+        {
+            if (txt.name == "YourScoreText")
+            {
+                txt.text = "Your Score : " + score;
+            }
+        }
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("IntroScene", LoadSceneMode.Single);
     }
 }
