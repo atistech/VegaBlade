@@ -6,16 +6,15 @@ using UnityEngine.SceneManagement;
 public class Cutter : MonoBehaviour
 {
     private GameScene gameScene;
-    private IntroScene introScene;
     private InputController inputController;
 
     private Collider lastCollider;
+    public Collider lastBombCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         gameScene = FindObjectOfType<GameScene>();
-        introScene = FindObjectOfType<IntroScene>();
         inputController = FindObjectOfType<InputController>();
     }
 
@@ -33,32 +32,17 @@ public class Cutter : MonoBehaviour
             //collider is bomb
             if (collider.tag == "Bomb")
             {
-                //active scene is "GameScene"
-                if (SceneManager.GetActiveScene().name == "GameScene")
+                if (lastBombCollider != collider)
                 {
+                    lastBombCollider = collider;
                     gameScene.BombCut(collider.gameObject);
                 }
-                //active scene is "IntroScene"
-                else
-                {
-                    introScene.BombCut(collider.gameObject);
-                }
-                
             }
             //collider is any cuttable object
             else
             {
-                //active scene is "GameScene"
-                if (SceneManager.GetActiveScene().name == "GameScene")
-                {
-                    Check(collider);
-                    gameScene.NormalCut(collider.gameObject);
-                }
-                //active scene is "IntroScene"
-                else
-                {
-                    introScene.NormalCut(collider.gameObject);
-                }
+                Check(collider);
+                gameScene.NormalCut(collider.gameObject);
             }
         }
     }

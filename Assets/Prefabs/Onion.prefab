@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4526087951931675293}
   - component: {fileID: 4526087951931675292}
   - component: {fileID: -6764417425776424064}
+  - component: {fileID: 5400428117867354748}
   m_Layer: 8
   m_Name: Onion
   m_TagString: Onion
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4526087951931675291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 2.2, y: 2, z: 2.2}
+  m_LocalScale: {x: 2.5, y: 2.3, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,3 +111,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5400428117867354748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526087951931675291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13febab52c31bf14899364eb6330a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerMaterial: {fileID: 2100000, guid: 9306f033cb1abe24bb58e20dcffe0468, type: 2}
+  innerMaterial: {fileID: 2100000, guid: 074a02fb9d2994247a3926adc55177d5, type: 2}
+  effect: {fileID: 364851283172567858, guid: 2b88bc280406dcc41ae85f4f005ba98f, type: 3}
+  effectColor: {r: 0.99607843, g: 0.6392157, b: 0.49803922, a: 1}

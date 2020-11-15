@@ -12,7 +12,14 @@ public class InputController : MonoBehaviour
         {
             if (mousePosition.y < 4 && mousePosition.y > -4)
             {
-                obj.transform.position = mousePosition + new Vector3(0, 0, 2);
+                if (Input.GetMouseButton(0))
+                {
+                    obj.transform.position = mousePosition + new Vector3(0, 0, 2);
+                }
+                else
+                {
+                    obj.transform.position = new Vector3(0, 0, -2);
+                }
             }
         }
     }

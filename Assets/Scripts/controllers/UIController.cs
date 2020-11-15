@@ -48,20 +48,20 @@ public class UIController : MonoBehaviour
         gameOverPanel.SetActive(true);
         foreach(Text txt in FindObjectsOfType<Text>())
         {
-            if (txt.name == "YourScoreText")
+            if (txt.name == "ScoreResultText")
             {
-                txt.text = "Your Score : " + score;
+                txt.text = ""+score;
             }
         }
     }
 
     public void ExitButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("IntroScene", LoadSceneMode.Single);
     }
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("IntroScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EzySlice;
 
 public class GameScene : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class GameScene : MonoBehaviour
     public GameObject explosion;
 
     private UIController uiController;
-    private EzySliceController ezySliceController;
     private SoundController soundController;
 
     private int score = 0;
@@ -23,7 +23,6 @@ public class GameScene : MonoBehaviour
     void Start()
     {
         uiController = FindObjectOfType<UIController>();
-        ezySliceController = FindObjectOfType<EzySliceController>();
         soundController = FindObjectOfType<SoundController>();
         GenerateNew();
     }
@@ -51,7 +50,7 @@ public class GameScene : MonoBehaviour
         //play bomb sound effect
         soundController.BombEffect();
         //cut the game object with destroy in 4 seconds
-        ezySliceController.Cut(obj.gameObject, 0.25f);
+        Cut(obj, 0.25f);
         //add the explosion object
         GameObject exp = Instantiate(explosion, 
             obj.transform.position, Quaternion.identity);
@@ -70,7 +69,7 @@ public class GameScene : MonoBehaviour
         //show point text on the cutting position
         uiController.AddPointText(obj.transform.position);
         //cut the game object with destroy in 4 seconds
-        ezySliceController.Cut(obj.gameObject, 4);
+        Cut(obj, 4);
     }
 
     public void AddScore()
@@ -97,8 +96,8 @@ public class GameScene : MonoBehaviour
                 CreateRigidbody(onion);
             else if (random == 6)
                 CreateRigidbody(bomb);
-            
-            Invoke("GenerateNew", 3);
+
+            Invoke("GenerateNew", 2.5f);
         }
     }
     
@@ -125,6 +124,21 @@ public class GameScene : MonoBehaviour
                 //destroy game object in 4 seconds
                 Destroy(obj, 4);
             }
+        }
+    }
+
+    private void Cut(GameObject obj, float time)
+    {
+        CuttableObject cut = obj.GetComponent<CuttableObject>();
+
+        SlicedHull cuttedObject = obj.Slice(obj.transform.position + new Vector3(0.01f, 0.01f, 0.01f), transform.up);
+
+        if (cuttedObject != null)
+        {
+            GameObject upperHull = cuttedObject.CreateUpperHull(obj, cut.innerMaterial);
+            GameObject lowerHull = cuttedObject.CreateLowerHull(obj, cut.innerMaterial);
+
+            cut.RunRigidbodyAnimation(upperHull, lowerHull, time);
         }
     }
 }

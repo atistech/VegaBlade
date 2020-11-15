@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1821632604355872961}
   - component: {fileID: 1821632604355872962}
   - component: {fileID: 1821632604355872963}
+  - component: {fileID: -7786518448836975163}
   m_Layer: 8
   m_Name: Cucumber
   m_TagString: Cucumber
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1821632604355872964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1.5, y: 2, z: 1.5}
+  m_LocalScale: {x: 1.2, y: 1.7, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,3 +112,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7786518448836975163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821632604355872964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13febab52c31bf14899364eb6330a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerMaterial: {fileID: 2100000, guid: 37917e0df31b3324a9109ca5d1ed0aa9, type: 2}
+  innerMaterial: {fileID: 2100000, guid: 96bb9cd88db3032419ae86943c2a5f86, type: 2}
+  effect: {fileID: 364851283172567858, guid: 2b88bc280406dcc41ae85f4f005ba98f, type: 3}
+  effectColor: {r: 0.43529412, g: 0.6, b: 0.21568628, a: 1}

@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 4860658066365264442}
   - component: {fileID: 4860658066365264441}
   - component: {fileID: 4860658066365264440}
-  - component: {fileID: 4860658066365264443}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Bomb
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4860658066365264443
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4860658066365264437}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &4860658067743063108
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +92,7 @@ GameObject:
   - component: {fileID: 4860658067743063114}
   - component: {fileID: 4860658067743063109}
   - component: {fileID: 5055619645728538713}
+  - component: {fileID: 2864385321727101827}
   m_Layer: 8
   m_Name: Bomb
   m_TagString: Bomb
@@ -123,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 4860658067743063108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 4860658066365264442}
   - {fileID: 4862666058156438755}
@@ -206,6 +192,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2864385321727101827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4860658067743063108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13febab52c31bf14899364eb6330a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerMaterial: {fileID: 2100000, guid: 094efafadb472b94785bca18c65219ee, type: 2}
+  innerMaterial: {fileID: 2100000, guid: 094efafadb472b94785bca18c65219ee, type: 2}
+  effect: {fileID: 364851283172567858, guid: 2b88bc280406dcc41ae85f4f005ba98f, type: 3}
+  effectColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &4860658065778265999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,19 +217,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1001005852633408, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1230862096963796, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1393688157360954, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1497415103117672, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Name
@@ -235,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4274653050354540, guid: e55149ba6f4d00741984987e258c3378, type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1921885927474005429}
   - component: {fileID: 3873758326763719379}
   - component: {fileID: 5895240693287840015}
+  - component: {fileID: 1192173816023915016}
   m_Layer: 8
   m_Name: Tomato
   m_TagString: Tomato
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7417104384720971907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 2.5, y: 2.3, z: 2.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,3 +111,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1192173816023915016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417104384720971907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13febab52c31bf14899364eb6330a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerMaterial: {fileID: 2100000, guid: 0f77a6821b0df314e988bb8679adb3ac, type: 2}
+  innerMaterial: {fileID: 2100000, guid: 60f70aa8f0ea8cc49945a2cedfc3bfd3, type: 2}
+  effect: {fileID: 364851283172567858, guid: 2b88bc280406dcc41ae85f4f005ba98f, type: 3}
+  effectColor: {r: 0.8784314, g: 0.078431375, b: 0.047058824, a: 1}
