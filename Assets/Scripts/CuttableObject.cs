@@ -33,17 +33,21 @@ public class CuttableObject : MonoBehaviour
 
     private void AddComponent(GameObject obj, int sign)
     {
+        obj.transform.position = obj.transform.position + new Vector3(0, 0, 2);
+        
         //game object is cucumber
         if (obj.tag == "Cucumber")
         {
             //cucumber has capsule collider
             obj.AddComponent<CapsuleCollider>();
+            obj.GetComponent<CapsuleCollider>().isTrigger = true;
         }
         //game object is others
         else
         {
             //others have sphere collider
             obj.AddComponent<SphereCollider>();
+            obj.GetComponent<SphereCollider>().isTrigger = true;
         }
 
         //rotate game object to see inside

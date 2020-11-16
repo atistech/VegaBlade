@@ -75,42 +75,94 @@ public class GameScene : MonoBehaviour
     public void AddScore()
     {
         //score increase by one
-        score++;
+        score+=10;
     }
 
     private void GenerateNew()
     {
         if (crossCounter < 3)
         {
-            int random = Random.Range(1, 7);
+            int random = Random.Range(1, 4);
 
-            if (random == 1)
-                CreateRigidbody(lemon);
-            else if (random == 2)
-                CreateRigidbody(cucumber);
-            else if (random == 3)
-                CreateRigidbody(tomato);
-            else if (random == 4)
-                CreateRigidbody(potato);
-            else if (random == 5)
-                CreateRigidbody(onion);
-            else if (random == 6)
-                CreateRigidbody(bomb);
+            StartCoroutine(RandomCreateRigidbody(random)); 
 
-            Invoke("GenerateNew", 2.5f);
+            Invoke("GenerateNew", 2f);
+        }
+    }
+
+    private GameObject RandomGameObject()
+    {
+        int random = Random.Range(1, 7);
+
+        if (random == 1)
+            return lemon;
+        else if (random == 2)
+            return cucumber;
+        else if (random == 3)
+            return tomato;
+        else if (random == 4)
+            return potato;
+        else if (random == 5)
+            return onion;
+        else if (random == 6)
+            return bomb;
+        else
+            return null;
+    }
+
+    private IEnumerator RandomCreateRigidbody(int param)
+    {
+        float delay = 0.3f;
+
+        int[] array = { -2, 0, 1 };
+        if (param == 1)
+        {
+            int random = Random.Range(0, 3);
+            CreateRigidbody(RandomGameObject(), array[random]);
+        }
+        if (param == 2)
+        {
+            int random = Random.Range(0, 3);
+            CreateRigidbody(RandomGameObject(), array[random]);
+            int random2 = Random.Range(0, 3);
+            while (random == random2)
+            {
+                random2 = Random.Range(0, 3);
+            }
+            yield return new WaitForSeconds(delay);
+            CreateRigidbody(RandomGameObject(), array[random2]);
+        }
+        if (param == 3)
+        {
+            CreateRigidbody(RandomGameObject(), array[0]);
+            yield return new WaitForSeconds(delay);
+            CreateRigidbody(RandomGameObject(), array[1]);
+            yield return new WaitForSeconds(delay);
+            CreateRigidbody(RandomGameObject(), array[2]);
         }
     }
     
-    private void CreateRigidbody(GameObject param)
+    private void CreateRigidbody(GameObject obj, int random)
     {
         //add new game object
-        GameObject gameObject = Instantiate(param, new Vector3(-7, -7, 3), Quaternion.identity);
+        GameObject gameObject = Instantiate(obj, new Vector3(random, -7, 3), Quaternion.identity);
         //set name as "CuttableObject"
         gameObject.name = "CuttableObject";
         //add up force with 13x
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.up * 13, ForceMode.VelocityChange);
-        //add right force with 7x
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.right * 7, ForceMode.VelocityChange);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.up * 14, ForceMode.VelocityChange);
+
+        int random2 = Random.Range(1, 3);
+        
+        if (random2 == 1)
+        {
+            //add right force with 7x
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.right * 3, ForceMode.VelocityChange);
+        }
+        else if (random2 == 2)
+        {
+            //add right force with 7x
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.right * -3, ForceMode.VelocityChange);
+        }
     }
 
     private void RemoveUncuttedObjects()
